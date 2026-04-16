@@ -1,9 +1,15 @@
 *** Settings ***
-Library    SeleniumLibrary
+Resource    ../pages/login_page.robot
+Test Setup    Open Browser To Login Page
+Test Teardown    Close Browser Session
 
 *** Test Cases ***
-Ouvrir Google
-    Open Browser    https://www.google.com    chrome
-    Maximize Browser Window
-    Sleep    10s
-    Close Browser
+Valid Login Test
+    [Tags]    smoke    regression
+    Login With Valid Credentials
+    Verify Success Login
+
+Invalid Login Test
+    [Tags]    regression
+    Login With Invalid Credentials
+    Verify Failed Login
